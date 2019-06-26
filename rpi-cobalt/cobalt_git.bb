@@ -1,4 +1,4 @@
-SUMMARY = "Depot tools for Cobalt"
+SUMMARY = "Cobalt with wayland-egl on rpi"
 HOMEPAGE = "https://cobalt.googlesource.com/"
 BUGTRACKER = "https://cobalt.googlesource.com/"
 #TODO Check the license
