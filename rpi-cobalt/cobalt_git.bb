@@ -13,6 +13,7 @@ SRC_URI += "git://cobalt.googlesource.com/depot_tools.git;protocol=https;rev=mas
 SRC_URI += "git://github.com/stagingrdkm/rpi-cobalt-wayland;protocol=https;rev=master;name=wayland;destsuffix=wayland"
 SRC_URI += "git://cobalt.googlesource.com/cobalt;protocol=https;rev=master;name=cobalt"
 SRC_URI += "file://resolution-fix.patch"
+SRC_URI += "file://0001-Do-not-use-clang-compiler.patch"
 
 S = "${WORKDIR}/git/"
 
