@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://src/LICENSE;md5=d2d164565cc10f298390174d9cb6d18d"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-DEPENDS = "userland wayland gstreamer1.0 gstreamer1.0-plugins-base python-native"
+DEPENDS = "userland wayland gstreamer1.0 gstreamer1.0-plugins-base python-native protobuf protobuf-c-native"
 
 SRC_URI += "git://cobalt.googlesource.com/depot_tools.git;protocol=https;rev=master;destsuffix=depot_tools;name=depot_tools"
 SRC_URI += "git://github.com/stagingrdkm/rpi-cobalt-wayland;protocol=https;rev=master;name=wayland;destsuffix=wayland"
