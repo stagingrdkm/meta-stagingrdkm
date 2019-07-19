@@ -1,4 +1,4 @@
-From 64c008a1d27c4dd5a328713b44309c24549e89e1 Mon Sep 17 00:00:00 2001
+From 5def4af2f3b60f26d201edaa516708f28e6dfad1 Mon Sep 17 00:00:00 2001
 From: Damian Wrobel <dwrobel@ertelnet.rybnik.pl>
 Date: Thu, 18 Jul 2019 10:07:26 +0200
 Subject: [PATCH] Do not use clang compiler
@@ -16,18 +16,12 @@ group obj.host/third_party/protobuf/src/google/protobuf/compiler/protoc.main.o o
 /usr/bin/ld: cannot find -lstdc++_nonshared
 
 Signed-off-by: Damian Wrobel <dwrobel@ertelnet.rybnik.pl>
-
 ---
- src/build/common.gypi                       |  2 +-
- src/starboard/build/base_configuration.gypi |  2 +-
- src/starboard/tools/build.py                | 15 +++++----------
- src/v8/gypfiles/toolchain.gypi              |  3 ---
- 4 files changed, 7 insertions(+), 15 deletions(-)
 
-diff --git a/src/build/common.gypi b/src/build/common.gypi
-index 7078e81..7f79c20 100644
---- a/src/build/common.gypi
-+++ b/src/build/common.gypi
+Index: git/src/build/common.gypi
+===================================================================
+--- git.orig/src/build/common.gypi
++++ git/src/build/common.gypi
 @@ -113,7 +113,7 @@
      'msvs_debug_link_incremental%': '2',
  
@@ -37,23 +31,39 @@ index 7078e81..7f79c20 100644
      'make_clang_dir%': 'third_party/llvm-build/Release+Asserts',
  
      # These two variables can be set in GYP_DEFINES while running
-diff --git a/src/starboard/build/base_configuration.gypi b/src/starboard/build/base_configuration.gypi
-index a1c2a1d..0566726 100644
---- a/src/starboard/build/base_configuration.gypi
-+++ b/src/starboard/build/base_configuration.gypi
-@@ -177,7 +177,7 @@
+Index: git/src/cobalt/build/cobalt_configuration.gypi
+===================================================================
+--- git.orig/src/cobalt/build/cobalt_configuration.gypi
++++ git/src/cobalt/build/cobalt_configuration.gypi
+@@ -34,7 +34,7 @@
+     'variables': {
+       'cobalt_webapi_extension_source_idl_files%': [],
+       'cobalt_webapi_extension_generated_header_idl_files%': [],
+-      'cobalt_v8_buildtime_snapshot%': "true",
++      'cobalt_v8_buildtime_snapshot%': "false",
+     },
+ 
+     # Whether Cobalt is being built.
+Index: git/src/starboard/build/base_configuration.gypi
+===================================================================
+--- git.orig/src/starboard/build/base_configuration.gypi
++++ git/src/starboard/build/base_configuration.gypi
+@@ -173,11 +173,9 @@
+            target_arch=="ppc"', {
+             # All the 32 bit CPU architectures v8 supports.
+             'compiler_flags_cc_host%': [
+-              '-m32',
                '--std=gnu++11',
              ],
              'linker_flags_host%': [
 -              '-target', 'i386-unknown-linux-gnu',
-+              '-m32',
                '-pthread',
              ],
            }, {
-diff --git a/src/starboard/tools/build.py b/src/starboard/tools/build.py
-index 173cd73..077e98c 100644
---- a/src/starboard/tools/build.py
-+++ b/src/starboard/tools/build.py
+Index: git/src/starboard/tools/build.py
+===================================================================
+--- git.orig/src/starboard/tools/build.py
++++ git/src/starboard/tools/build.py
 @@ -247,15 +247,10 @@ def FindAndInitGoma():
  def GetHostCompilerEnvironment(clang_spec, goma_supports_compiler=False):
    """Return the host compiler toolchain environment."""
@@ -73,7 +83,7 @@ index 173cd73..077e98c 100644
        'ARFLAGS_host': 'rcs',
        'ARTHINFLAGS_host': 'rcsT',
    }
-@@ -263,8 +258,8 @@ def GetHostCompilerEnvironment(clang_spec, goma_supports_compiler=False):
+@@ -263,8 +258,8 @@ def GetHostCompilerEnvironment(clang_spe
    if goma_supports_compiler and FindAndInitGoma():
      logging.info('Using Goma')
      host_clang_environment.update({
@@ -84,10 +94,10 @@ index 173cd73..077e98c 100644
      })
    return host_clang_environment
  
-diff --git a/src/v8/gypfiles/toolchain.gypi b/src/v8/gypfiles/toolchain.gypi
-index fce4d07..53e32d2 100644
---- a/src/v8/gypfiles/toolchain.gypi
-+++ b/src/v8/gypfiles/toolchain.gypi
+Index: git/src/v8/gypfiles/toolchain.gypi
+===================================================================
+--- git.orig/src/v8/gypfiles/toolchain.gypi
++++ git/src/v8/gypfiles/toolchain.gypi
 @@ -159,9 +159,6 @@
    ],
    'target_defaults': {
@@ -98,6 +108,21 @@ index fce4d07..53e32d2 100644
      ],
      'conditions': [
        ['v8_target_arch=="arm"', {
--- 
-2.9.5
-
+@@ -1017,8 +1014,6 @@
+                     'cflags': [ '-m31' ],
+                     'ldflags': [ '-m31' ]
+                   },{
+-                   'cflags': [ '-m32' ],
+-                   'ldflags': [ '-m32' ]
+                   }],
+                 ],
+               }],
+@@ -1035,8 +1030,6 @@
+                     'cflags': [ '-m31' ],
+                     'ldflags': [ '-m31' ]
+                   },{
+-                   'cflags': [ '-m32' ],
+-                   'ldflags': [ '-m32' ],
+                   }],
+                 ],
+               }],

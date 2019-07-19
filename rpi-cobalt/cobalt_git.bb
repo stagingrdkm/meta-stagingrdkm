@@ -1,4 +1,4 @@
-SUMMARY = "Cobalt with wayland-egl on rpi"
+SUMMARY = "Cobalt (with wayland-egl backend)"
 HOMEPAGE = "https://cobalt.googlesource.com/"
 BUGTRACKER = "https://cobalt.googlesource.com/"
 #TODO Check the license
@@ -7,7 +7,10 @@ LIC_FILES_CHKSUM = "file://src/LICENSE;md5=d2d164565cc10f298390174d9cb6d18d"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-DEPENDS = "userland wayland gstreamer1.0 gstreamer1.0-plugins-base python-native protobuf protobuf-c-native"
+DEPENDS = "${@bb.utils.contains('ONEMW_SUPPORT', '1', \
+    'wayland-egl virtual/egl virtual/libgles2 gstreamer1.0 gstreamer1.0-plugins-base python-native', \
+    'userland wayland gstreamer1.0 gstreamer1.0-plugins-base python-native' \
+    , d)}"
 
 SRC_URI += "git://cobalt.googlesource.com/depot_tools.git;protocol=https;rev=master;destsuffix=depot_tools;name=depot_tools"
 SRC_URI += "git://github.com/stagingrdkm/rpi-cobalt-wayland;protocol=https;rev=master;name=wayland;destsuffix=wayland"
@@ -29,7 +32,7 @@ do_configure() {
 
 do_compile() {
     export PATH=$PATH:${S}/../depot_tools
-    ninja -C ${S}/src/out/${PLATFORM}_${BUILD_TYPE} cobalt
+    ninja -v -C ${S}/src/out/${PLATFORM}_${BUILD_TYPE} cobalt
 }
 
 do_install() {
