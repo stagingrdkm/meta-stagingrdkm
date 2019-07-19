@@ -21,7 +21,7 @@ SRC_URI += "file://0001-Do-not-use-clang-compiler.patch"
 S = "${WORKDIR}/git/"
 
 PLATFORM ?= "raspi-wayland"
-BUILD_TYPE ?= "debug"
+BUILD_TYPE ?= "gold"
 
 do_configure() {
     export PATH=$PATH:${S}/../depot_tools
