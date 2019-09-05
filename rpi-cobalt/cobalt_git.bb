@@ -3,7 +3,7 @@ HOMEPAGE = "https://cobalt.googlesource.com/"
 BUGTRACKER = "https://cobalt.googlesource.com/"
 #TODO Check the license
 LICENSE = "BSD-3-Clause & LGPL-2.0 & LGPL-2.1"
-LIC_FILES_CHKSUM = "file://src/LICENSE;md5=d2d164565cc10f298390174d9cb6d18d"
+LIC_FILES_CHKSUM = "file://src/LICENSE;md5=0fca02217a5d49a14dfe2d11837bb34d"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
@@ -17,6 +17,7 @@ SRC_URI += "git://github.com/stagingrdkm/rpi-cobalt-wayland;protocol=https;rev=m
 SRC_URI += "git://cobalt.googlesource.com/cobalt;protocol=https;rev=master;name=cobalt"
 SRC_URI += "file://resolution-fix.patch"
 SRC_URI += "file://0001-Do-not-use-clang-compiler.patch"
+SRC_URI += "file://0001-Fix-to-cobalt-compilation-issue.patch"
 
 S = "${WORKDIR}/git/"
 
