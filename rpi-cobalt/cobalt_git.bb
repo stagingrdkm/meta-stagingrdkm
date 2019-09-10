@@ -26,7 +26,7 @@ LIC_FILES_CHKSUM = " \
     file://src/LICENSE;md5=0fca02217a5d49a14dfe2d11837bb34d \
     file://../depot_tools/LICENSE;md5=c2c05f9bdd5fc0b458037c2d1fb8d95e \
     file://../wayland/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57 \
-    file://../wayland/NOTICE;md5=0d9d6daa9e3faea6842d9640d05ffa3d \
+    file://../wayland/NOTICE;md5=1747492b12a6d7e65a574807f9786501 \
 "
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
@@ -39,7 +39,7 @@ DEPENDS = "${@bb.utils.contains('ONEMW_SUPPORT', '1', \
 
 # (dw) We don't know when this will be certified - so we sticked to the master branch
 SRC_URI += "git://cobalt.googlesource.com/depot_tools.git;protocol=https;rev=acbfb02f445b1612e08131e2a4aaca4f1a849050;destsuffix=depot_tools;name=depot_tools"
-SRC_URI += "git://github.com/stagingrdkm/rpi-cobalt-wayland;protocol=https;rev=158b19f906e7f51a527d0bcc39ff8e99e4402de5;name=wayland;destsuffix=wayland"
+SRC_URI += "git://github.com/stagingrdkm/rpi-cobalt-wayland;protocol=https;rev=944e0f47d5073580329da9c0cc96286b72a29f4a;name=wayland;destsuffix=wayland"
 SRC_URI += "git://cobalt.googlesource.com/cobalt;protocol=https;rev=3afedffaddc5ae13b4d21dcf2ba98dc14ca58e02;name=cobalt"
 SRC_URI += "file://resolution-fix.patch"
 SRC_URI += "file://0001-Do-not-use-clang-compiler.patch"
